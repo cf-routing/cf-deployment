@@ -9,3 +9,17 @@
 - type: replace
   path: /instance_groups/name=database/jobs/name=proxy/properties/shutdown_delay?
   value: 30
+
+- type: replace
+  path: /instance_groups/name=database/jobs/name=pxc-mysql/properties/seeded_users?/cluster-health-logger
+  value:
+    password: ((cf_mysql_mysql_cluster_health_password))
+    host: loopback
+    role: minimal
+
+- type: replace
+  path: /instance_groups/name=database/jobs/name=pxc-mysql/properties/seeded_users?/galera-agent
+  value:
+    password: ((cf_mysql_mysql_galera_healthcheck_password))
+    host: loopback
+    role: minimal
